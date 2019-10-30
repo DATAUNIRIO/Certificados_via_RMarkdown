@@ -1,0 +1,67 @@
+% Exemplo de certificados para eventos ou congressos
+%
+% Recomendo a leitura do manual do pacotes 'csvtools'
+%
+% Autor: Jesús P. Mena-Chalco <jmena@vision.ime.usp.br>
+% Wed Jul 14 17:20:29 BRT 2010
+
+\documentclass{article}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}   
+\usepackage{csvtools}
+\usepackage{fancyhdr}
+\usepackage[usenames,svgnames,dvipsnames,table]{xcolor}
+\usepackage[none]{hyphenat} 
+\usepackage{setspace}
+\usepackage[vcentering,landscape,a4paper,
+            top=1.54cm,bottom=2.54cm,
+            left=2.54cm,right=2.54cm]{geometry}
+
+% Definições para o fancyhdr
+\lhead{}
+\chead{}
+\rhead{}
+\renewcommand{\headrule}{\color{white}}
+\cfoot{\includegraphics[width=\textwidth]{imagens/footer.jpg}}
+\pagestyle{fancy}
+
+% Documento
+\begin{document}
+	\applyCSVfile{./lista-participantes.csv}
+	{
+		\doublespacing
+		\noindent
+		\begin{minipage}{\textwidth}
+			\includegraphics[width=\textwidth]{imagens/header.jpg}
+
+			\sffamily
+			\bigskip
+			\bigskip
+
+			\begin{center}
+				{\Huge \textbf{Certificate of Attendance}}\\
+				\bigskip
+				\bigskip
+			\end{center}
+
+			\begin{center}
+				\begin{minipage}{0.8\textwidth}
+					{\Large This is to certify that \emph{\insertNOME}\ attended the
+				 	\texttt{name of the event}, from \texttt{month} 13$^{th}$ to 26$^{th}$ in
+					\texttt{local}, \texttt{country}.}
+				\end{minipage}
+			\end{center}
+
+			\vspace{2.0cm}
+			\singlespacing 
+
+			\begin{center}
+				\Large {\rule{7.0cm}{0.5pt}\\
+				\texttt{Name of the chair}\\
+				General Chair\\}
+			\end{center}
+
+		\end{minipage}
+	}
+\end{document}

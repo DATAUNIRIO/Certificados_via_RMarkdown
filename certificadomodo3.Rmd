@@ -1,0 +1,120 @@
+---
+output: 
+  pdf_document:
+    latex_engine: pdflatex
+documentclass: article
+header-includes: \usepackage[brazil]{babel} \usepackage[utf8]{inputenc} \usepackage{csvtools} \usepackage{fancyhdr} \usepackage[usenames,svgnames,dvipsnames,table]{xcolor} \usepackage[none]{hyphenat} \usepackage{setspace}
+geometry: vcentering,landscape,a4paper,
+            top=1.54cm,bottom=1.54cm,
+            left=2.54cm,right=2.54cm
+---
+
+```{r setup, include=FALSE}
+options(Encoding="UTF-8")
+knitr::opts_chunk$set(echo = TRUE)
+# ref: http://latex-exemplo.blogspot.com/2015/11/modelo-latex-para-certificados.html
+# ref: https://rmarkdown.rstudio.com/articles_mail_merge.html
+```
+
+
+
+```{r, echo=FALSE}
+
+presenca <- read.csv2("ListaPresenca300818.csv", stringsAsFactors = FALSE)
+name <- presenca$name[i]
+funcao <- presenca$funcao[i]
+```
+
+\thispagestyle{empty} 
+\begin{minipage}{\textwidth}
+			\includegraphics[width=\textwidth]{imagens/header.jpg}
+
+			\sffamily
+			\bigskip
+			\bigskip
+\end{minipage}
+
+
+\begin{center}
+				{\Huge \textbf{CERTIFICADO}}\\
+				\bigskip
+				\bigskip
+			\end{center}
+
+
+\begin{center}
+				\begin{minipage}{0.8\textwidth}
+					{\Large Certificamos que \emph{`r name`}\ esteve presente no 
+				 	\texttt{Lançamento do livro "Dom Casmurro"},  realizado em \texttt{05 de dezembro de 1899} na cidade de 
+					\texttt{Paris}, na qualidade de \texttt{visitante}.}
+				\end{minipage}
+			\end{center}
+			
+			
+
+	\begin{center}
+    	\vspace{1.2cm}
+    	\begin{minipage}
+{\textwidth}
+      \center
+			\includegraphics[width=\textwidth]{imagens/assinatura.png}
+			\end{minipage}
+
+			
+				\Large {\rule{7.0cm}{0.5pt}\\
+				\texttt{Machado de Assis}\\
+				Autor de Dom Casmurro\\}
+				\vspace{0.5cm}
+			\end{center}	
+			
+1.30082018.`r i`
+
+\begin{minipage}
+{\textwidth}
+			\includegraphics[width=\textwidth]{imagens/footer.jpg}
+
+\end{minipage}
+
+
+
+```{r eval=FALSE, include=FALSE}
+\begin{document}
+\applyCSVfile{./ListaPresenca300818.csv}
+	{
+		\doublespacing
+		\noindent
+		\begin{minipage}{\textwidth}
+			\includegraphics[width=\textwidth]{imagens/header.jpg}
+
+			\sffamily
+			\bigskip
+			\bigskip
+
+			\begin{center}
+				{\Huge \textbf{Certificate of Attendance}}\\
+				\bigskip
+				\bigskip
+			\end{center}
+
+			\begin{center}
+				\begin{minipage}{0.8\textwidth}
+					{\Large This is to certify that \emph{\insertNOME}\ attended the
+				 	\texttt{name of the event}, from \texttt{month} 13$^{th}$ to 26$^{th}$ in
+					\texttt{local}, \texttt{country}.}
+				\end{minipage}
+			\end{center}
+
+			\vspace{2.0cm}
+			\singlespacing 
+
+			\begin{center}
+				\Large {\rule{7.0cm}{0.5pt}\\
+				\texttt{Name of the chair}\\
+				General Chair\\}
+			\end{center}
+
+		\end{minipage}
+	}
+\end{document}
+```
+
